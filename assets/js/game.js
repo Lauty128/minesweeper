@@ -22,7 +22,6 @@ class Game{
     }
 
     validate_move(index){
-        console.log(index);
         if(this.#bombs_index.includes(index)){
             this.lostGame();
             return
@@ -66,7 +65,7 @@ class Game{
                 }
             }
         }
-        console.log(this.#bombs_index);
+        //console.log(this.#bombs_index);
     }
 
     loadGame(){
