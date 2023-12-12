@@ -6,13 +6,13 @@ class Components{
 
     static Bomb(index){
         return `<div class="Game__item Game__item--hidden" data-index="${index}">
-                <img src="/assets/img/bomb.png" />
+                <img src="assets/img/bomb.png" />
             </div>`
     }
 
     static Item(index){
         return `<div class="Game__item Game__item--hidden" data-index="${index}">
-            <img src="/assets/img/money.png" />
+            <img src="assets/img/money.png" />
         </div>`
     }
 

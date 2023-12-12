@@ -35,12 +35,12 @@ class Game{
         for(let index = 0; index < (this.columns * this.rows); index++) {
             if(this.#bombs_index.includes(index)){
                 Items += `<div class="Game__item Game__item--hidden" data-index="${index}">
-                    <img src="/assets/img/bomb.png" />
+                    <img src="assets/img/bomb.png" />
                 </div>`
             }
             else{
                 Items += `<div class="Game__item Game__item--hidden" data-index="${index}">
-                    <img src="/assets/img/money.png" />
+                    <img src="assets/img/money.png" />
                 </div>`
             }  
         }
