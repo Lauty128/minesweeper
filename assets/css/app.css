@@ -100,6 +100,7 @@ main{
     border: 1px solid black;
     padding: .5em;
     position: relative;
+    user-select: none;
 }
 
 .Game__item::after{

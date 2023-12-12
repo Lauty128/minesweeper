@@ -38,7 +38,6 @@ document.querySelector('main').addEventListener('click', e=>{
         game = new Game(columns, rows, bombs_quantity)
     }
 
-
 })
 
 
