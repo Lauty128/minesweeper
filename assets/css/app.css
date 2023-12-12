@@ -28,6 +28,18 @@ main{
 
 #Copyright{ text-align: center; font-family: 'Courier New', Courier, monospace }
 
+.CodeContainer{ text-align: center; font-size: .8em; }
+.Code{
+    background-color: black;
+    text-decoration: none;
+    color: #ffff;
+    padding: 1em;
+    border-radius: 5px;
+    transition: opacity .3s;
+}
+.Code:hover{ opacity: .7; }
+.Code svg{ vertical-align: middle; margin-right: 6px; }
+
 /* ----------------------- MENU */
 .Menu__form{ width: 300px; margin-top: 2em }
 
