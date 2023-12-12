@@ -1,0 +1,108 @@
+*{ box-sizing: border-box; }
+
+body{
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-image: url('../img/background.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+h1{ 
+    margin-top: 3em;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+main{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2em;
+}
+
+#Copyright{ text-align: center; font-family: 'Courier New', Courier, monospace }
+
+/* ----------------------- MENU */
+.Menu__form{ width: 300px; margin-top: 2em }
+
+.Menu__selectContainer{ margin-top: 1.3em }
+
+.Menu__selectContainer select{
+    display: block;
+    margin-top: 5px;
+    width: 100%;
+    padding: .4em;
+    font-size: 1.1em;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.Menu__form input[type="submit"]{
+    margin-top: 2em;
+    width: 100%;
+    padding: .7em;
+    background-color: rgb(94, 151, 44);
+    border: none;
+    cursor: pointer;
+    opacity: 1;
+    transition: opacity .3s;
+}
+.Menu__form input[type="submit"]:hover{ opacity: .7 }
+
+
+/* ----------------------- GAME */
+
+#GoBackMenu{
+    width: 150px;
+    padding: .5em;
+    border: none;
+    cursor: pointer;
+    background-color: rgb(55, 55, 55);
+    color: #ffff;
+}
+
+#RestartGame{
+    width: 300px;
+    padding: .5em;
+    border: none;
+    cursor: pointer;
+    background-color: rgb(173, 57, 57);
+    color: #ffff;
+}
+.Game{
+    display: grid;
+    grid-template-columns: 50px 50px 50px 50px 50px 50px;
+    gap: 1px;
+    width: fit-content;
+    margin: 3em auto;
+}
+
+.Game__item{
+    width: 100%;
+    height: 100%;
+    border: 1px solid black;
+    padding: .5em;
+    position: relative;
+}
+
+.Game__item::after{
+    content: '';
+    position: absolute;
+    background-color: #8d8d8d;
+    width: 100%; height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity .5s;
+    transition: background-color .3s;
+}
+.Game__item--hidden::after{ opacity: 1 }
+.Game__item--hidden{ cursor: pointer }
+.Game__item--hidden:hover::after{ background-color: #ffff }
+
+.Game__item img{ width: 100%; height: 100%; object-fit: cover }
