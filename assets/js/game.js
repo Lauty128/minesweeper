@@ -87,7 +87,8 @@ class Game{
 
     restart(){
         this.defineBombs();
-        this.loadGame()
+        this.loadGame();
+        this.moves = 0;
     }
 
 }
