@@ -8,6 +8,7 @@ class Game{
     rows;           //integer
     moves = 0;      //boolean
     status = true;  //boolean
+    history_points; //array
     
     //--> private
     #bombs_index;   //array
@@ -16,9 +17,14 @@ class Game{
         this.columns = columns;
         this.rows = rows;
         this.bomb_quantity = bombs_quantity;
-
+        
+        //------> Load history of LocalStorage
+        const pointsText = localStorage.getItem(`${this.columns}-${this.rows}-${this.bomb_quantity}`);
+        this.history_points = JSON.parse(pointsText) ? JSON.parse(pointsText) : [];
+        
+        //-------> Render game
         this.defineBombs();
-        this.loadGame()
+        this.loadGame();
     }
 
     validate_move(index){
@@ -61,28 +67,62 @@ class Game{
                 }
             }
         }
-        //console.log(this.#bombs_index);
     }
 
     loadGame(){
-
         document.querySelector('main').innerHTML = `${Components.Title()}
         <button id="GoBackMenu">← Menu Principal</button>
         <section class="Game" id="Game">
             ${ this.defineGrid() }
         </section>
         <button id="RestartGame">↻ Reiniciar juego</button>
+
+        <section class="History">
+            <h3 class="History__h3">Historial de juegos</h3>
+            ${this.load_points_history()}
+        </section>
         `;
         document.getElementById('Game').style.gridTemplateColumns = `repeat(${this.columns}, 50px)`;
     }
 
     lostGame(){
-        alert('Perdiste papito');
+        alert('Perdiste!!');
         alert('Total de jugadas correctas = ' + this.moves)
-
+        
         document.querySelectorAll('.Game__item--hidden').forEach(target=>{
             target.classList.remove('Game__item--hidden')
         })
+        this.store_points();
+    }
+
+    load_points_history(){
+        let Items = '';
+        const history = this.history_points;
+        Items = Components.History_point_header()
+
+        if(history.length == 0){
+            Items += Components.Empty_history_point();
+            return Items;
+        }
+
+        for(let index = (history.length - 1); index > -1; index--) {
+            Items += Components.History_point({
+                point: history[index].point,
+                date: new Date(history[index].date).toLocaleDateString()
+            })
+        }
+
+        return Items;
+    }
+
+    store_points(){
+        console.log(this.history_points);
+        if(this.history_points.length == 3){
+            this.history_points.shift();
+        }
+
+        this.history_points.push({ date: Date.now(), point: this.moves });
+        localStorage.setItem(`${this.columns}-${this.rows}-${this.bomb_quantity}`, JSON.stringify(this.history_points))
     }
 
     restart(){

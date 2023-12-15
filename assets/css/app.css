@@ -119,3 +119,46 @@ main{
 .Game__item--hidden:hover::after{ background-color: #ffff }
 
 .Game__item img{ width: 100%; height: 100%; object-fit: cover }
+
+.History{
+    width: 400px;
+    height: fit-content;
+    margin-bottom: 4em;
+    margin-top: 3.5em;
+}
+
+.History__h3{
+    background-color: #ffffff;
+    width: fit-content;
+    padding: 5px 15px 5px 10px;
+    letter-spacing: 2px;
+    font-family: 'Courier New', Courier, monospace;
+    position: relative;
+}
+.History__h3::after{
+    content: '';
+    width: 30px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: -20px;
+    background-color: #ffffff;
+    transform: skew(-30deg);
+}
+
+.History__point{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    margin-bottom: .5em;
+    background-color: #fff;
+}
+.History__point--header{
+    background-color: #8d8d8d;
+    color: #fff;
+}
+.History__point span{ font-weight: bold; font-family: 'Courier New', Courier, monospace; }
+
+.History__point--empty{
+    justify-content: center;
+}

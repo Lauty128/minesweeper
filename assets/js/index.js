@@ -8,7 +8,6 @@ let game;
 
 Menu.load();
 
-
 //-------------------------------------> Events
 document.querySelector('main').addEventListener('click', e=>{
     //---------> GAME

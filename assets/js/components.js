@@ -16,6 +16,26 @@ class Components{
         </div>`
     }
 
+    static History_point_header(){
+        return `<div class="History__point History__point--header">
+            <span>Fecha</span>
+            <span>Puntos</span>
+        </div>`
+    }
+
+    static History_point(point){
+        return `<div class="History__point">
+            <span>${point.date}</span>
+            <span>${point.point}</span>
+        </div>`
+    }
+
+    static Empty_history_point(point){
+        return `<div class="History__point History__point--empty">
+            <span>No hay historial de juegos</span>
+        </div>`
+    }
+
     static Menu(){
         return `${ this.Title() }
         <span class="Subtitle">Selecciona el formato de juego y dale a <b>Jugar</b></span>
