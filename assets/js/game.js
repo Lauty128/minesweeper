@@ -117,7 +117,7 @@ class Game{
 
     store_points(){
         console.log(this.history_points);
-        if(this.history_points.length == 3){
+        if(this.history_points.length == 5){
             this.history_points.shift();
         }
 
