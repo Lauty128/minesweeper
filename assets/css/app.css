@@ -1,3 +1,11 @@
+/* 
+    ░█████╗░░█████╗░███╗░░██╗███████╗██╗░██████╗░██╗░░░██╗██████╗░░█████╗░████████╗██╗░█████╗░███╗░░██╗░██████╗
+    ██╔══██╗██╔══██╗████╗░██║██╔════╝██║██╔════╝░██║░░░██║██╔══██╗██╔══██╗╚══██╔══╝██║██╔══██╗████╗░██║██╔════╝
+    ██║░░╚═╝██║░░██║██╔██╗██║█████╗░░██║██║░░██╗░██║░░░██║██████╔╝███████║░░░██║░░░██║██║░░██║██╔██╗██║╚█████╗░
+    ██║░░██╗██║░░██║██║╚████║██╔══╝░░██║██║░░╚██╗██║░░░██║██╔══██╗██╔══██║░░░██║░░░██║██║░░██║██║╚████║░╚═══██╗
+    ╚█████╔╝╚█████╔╝██║░╚███║██║░░░░░██║╚██████╔╝╚██████╔╝██║░░██║██║░░██║░░░██║░░░██║╚█████╔╝██║░╚███║██████╔╝
+    ░╚════╝░░╚════╝░╚═╝░░╚══╝╚═╝░░░░░╚═╝░╚═════╝░░╚═════╝░╚═╝░░╚═╝╚═╝░░╚═╝░░░╚═╝░░░╚═╝░╚════╝░╚═╝░░╚══╝╚═════╝░
+*/
 *{ box-sizing: border-box; }
 
 body{
@@ -11,11 +19,7 @@ body{
     background-size: cover;
 }
 body::-webkit-scrollbar{ display: none }
-h1{ 
-    margin-top: 1.5em;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
+h1{  margin-top: 1.5em; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif }
 
 main{
     width: 100%;
@@ -41,7 +45,14 @@ main{
 .Code:hover{ opacity: .7; }
 .Code svg{ vertical-align: middle; margin-right: 6px; }
 
-/* ----------------------- MENU */
+/*
+    ███╗░░░███╗███████╗███╗░░██╗██╗░░░██╗
+    ████╗░████║██╔════╝████╗░██║██║░░░██║
+    ██╔████╔██║█████╗░░██╔██╗██║██║░░░██║
+    ██║╚██╔╝██║██╔══╝░░██║╚████║██║░░░██║
+    ██║░╚═╝░██║███████╗██║░╚███║╚██████╔╝
+    ╚═╝░░░░░╚═╝╚══════╝╚═╝░░╚══╝░╚═════╝░
+*/
 .Menu__form{ width: 300px; margin-top: 2em }
 
 .Menu__selectContainer{ margin-top: 1.3em }
@@ -67,6 +78,15 @@ main{
 }
 .Menu__form input[type="submit"]:hover{ opacity: .7 }
 
+/*     
+    ░██████╗░█████╗░██╗░░░██╗███╗░░██╗██████╗░
+    ██╔════╝██╔══██╗██║░░░██║████╗░██║██╔══██╗
+    ╚█████╗░██║░░██║██║░░░██║██╔██╗██║██║░░██║
+    ░╚═══██╗██║░░██║██║░░░██║██║╚████║██║░░██║
+    ██████╔╝╚█████╔╝╚██████╔╝██║░╚███║██████╔╝
+    ╚═════╝░░╚════╝░░╚═════╝░╚═╝░░╚══╝╚═════╝░
+*/
+
 .Sound{
     position: absolute;
     top: 1.5em;
@@ -74,11 +94,7 @@ main{
     display: flex;
     gap: 2em;
 }
-.Sound__item{
-    transform: scale(1.2);
-    cursor: pointer;
-    transition: opacity .3s;
-}
+.Sound__item{ transform: scale(1.2); cursor: pointer; transition: opacity .3s }
 .Sound__item:hover{ opacity: .6 }
 .Sound svg{ pointer-events: none }
 
@@ -106,16 +122,23 @@ main{
 .Sound__AlbumItem:nth-child(0){ margin-bottom: -100px; }
 .Sound__AlbumItem--play{ margin-left: .5em; cursor: pointer }
 .Sound__AlbumItem--active{ margin-left: .5em }
+
+/* Buttons and References */
 #CloseAlbum{ float: right; width: fit-content; margin-top: 2px; margin-right: -5px; cursor: pointer }
 #CloseAlbum:hover{ opacity: .5 }
-#Album{
-    margin-top: 2.5em;
-}
+#Album{ margin-top: 2.5em;}
 
 @media screen and (max-width: 600px) {
-    #Copyright, .CodeContainer{ text-align: start; margin-left: 10px; }
+    #Copyright, .CodeContainer{ text-align: start; margin-left: 10px }
 }
-/* ----------------------- GAME */
+/*
+    ░██████╗░░█████╗░███╗░░░███╗███████╗
+    ██╔════╝░██╔══██╗████╗░████║██╔════╝
+    ██║░░██╗░███████║██╔████╔██║█████╗░░
+    ██║░░╚██╗██╔══██║██║╚██╔╝██║██╔══╝░░
+    ╚██████╔╝██║░░██║██║░╚═╝░██║███████╗
+    ░╚═════╝░╚═╝░░╚═╝╚═╝░░░░░╚═╝╚══════╝
+*/
 
 #GoBackMenu{
     width: 150px;
@@ -150,6 +173,7 @@ main{
     position: relative;
     user-select: none;
 }
+.Game__item img{ width: 100%; height: 100%; object-fit: cover }
 
 .Game__item::after{
     content: '';
@@ -162,12 +186,19 @@ main{
     transition: opacity .5s;
     transition: background-color .3s;
 }
+/* HIDDEN ITEM */
 .Game__item--hidden::after{ opacity: 1 }
 .Game__item--hidden{ cursor: pointer }
 .Game__item--hidden:hover::after{ background-color: #ffff }
 
-.Game__item img{ width: 100%; height: 100%; object-fit: cover }
-
+/* 
+    ░██████╗░░█████╗░███╗░░░███╗███████╗░██████╗   ██╗░░██╗██╗░██████╗████████╗░█████╗░██████╗░██╗░░░██╗
+    ██╔════╝░██╔══██╗████╗░████║██╔════╝██╔════╝   ██║░░██║██║██╔════╝╚══██╔══╝██╔══██╗██╔══██╗╚██╗░██╔╝
+    ██║░░██╗░███████║██╔████╔██║█████╗░░╚█████╗░   ███████║██║╚█████╗░░░░██║░░░██║░░██║██████╔╝░╚████╔╝░
+    ██║░░╚██╗██╔══██║██║╚██╔╝██║██╔══╝░░░╚═══██╗   ██╔══██║██║░╚═══██╗░░░██║░░░██║░░██║██╔══██╗░░╚██╔╝░░
+    ╚██████╔╝██║░░██║██║░╚═╝░██║███████╗██████╔╝   ██║░░██║██║██████╔╝░░░██║░░░╚█████╔╝██║░░██║░░░██║░░░
+    ░╚═════╝░╚═╝░░╚═╝╚═╝░░░░░╚═╝╚══════╝╚═════╝░   ╚═╝░░╚═╝╚═╝╚═════╝░░░░╚═╝░░░░╚════╝░╚═╝░░╚═╝░░░╚═╝░░░
+*/
 .History{
     width: 400px;
     height: fit-content;
@@ -201,16 +232,10 @@ main{
     margin-bottom: .5em;
     background-color: #fff;
 }
-.History__point--header{
-    background-color: #8d8d8d;
-    color: #fff;
-}
 .History__point span{ font-weight: bold; font-family: 'Courier New', Courier, monospace; }
-
-.History__point--empty{
-    justify-content: center;
-}
+.History__point--header{ background-color: #8d8d8d; color: #fff }
+.History__point--empty{ justify-content: center }
 
 @media screen and (max-width: 500px) {
-    .History{ width: 80%; }
+    .History{ width: 80% }
 }
