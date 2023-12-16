@@ -2,11 +2,44 @@
 import Game from './game.js';
 import Menu from './menu.js';
 
-
-//-------------------------------------> Functions
+//-------------------------------------> Global variables
 let game;
 
+
+//-------------------------------------> Functions
 Menu.load();
+Menu.changeMusic();
+Menu.loadAlbum();
+
+Menu.SoundButton.addEventListener('click', ()=>{
+    Menu.changeSatusSound()
+})
+
+Menu.OpenAlbumButton.addEventListener('click', ()=>{
+    Menu.OpenAlbum();
+})
+Menu.AlbumBox.addEventListener('click', (e)=>{
+    if(e.target.getAttribute('id') == 'CloseAlbum'){
+        Menu.CloseAlbum()
+    }
+
+    if(e.target.classList.contains('Sound__AlbumItem--play')){
+        Menu.changeMusic(e.target.dataset.music || 0)
+        Menu.play()
+    }
+})
+
+// document.querySelector('.Sound').addEventListener('click', (e)=>{console.log(e.target);});
+
+
+
+Menu.Speaker.addEventListener('ended', ()=>{
+    console.log('Finalizado');
+    console.log('Musica reproducida = '+Menu.MusicNumber);
+    Menu.changeMusic();
+    console.log('Musica para reproducir = '+Menu.MusicNumber);
+    Menu.play();
+})
 
 //-------------------------------------> Events
 document.querySelector('main').addEventListener('click', e=>{
@@ -18,7 +51,7 @@ document.querySelector('main').addEventListener('click', e=>{
         const index = target.dataset.index;
         setTimeout(()=>{
             game.validate_move(+index);
-        }, 10)
+        }, 30)
     }
 
     if(target.getAttribute('id') == 'RestartGame'){

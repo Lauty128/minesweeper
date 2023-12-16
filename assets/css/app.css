@@ -10,6 +10,7 @@ body{
     background-repeat: no-repeat;
     background-size: cover;
 }
+body::-webkit-scrollbar{ display: none }
 h1{ 
     margin-top: 1.5em;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -66,7 +67,50 @@ main{
 }
 .Menu__form input[type="submit"]:hover{ opacity: .7 }
 
+.Sound{
+    position: absolute;
+    top: 1.5em;
+    right: 2em;
+    display: flex;
+    gap: 2em;
+}
+.Sound__item{
+    transform: scale(1.2);
+    cursor: pointer;
+    transition: opacity .3s;
+}
+.Sound__item:hover{ opacity: .6 }
+.Sound svg{ pointer-events: none }
 
+.Sound__Album{
+    width: 200px;
+    height: 200px;
+    overflow:hidden scroll ;
+    background-color: #fff;
+    display: none;
+    position: absolute;
+    top: 120%;
+    right: 60%;
+    padding: 2px 10px 10px 10px;
+    box-shadow: 0px 0px 7px 2px rgba(0, 0, 0, 0.3);
+}
+.Sound__Album--active{ display: block; }
+.Sound__Album::-webkit-scrollbar{ display: none }
+.Sound__AlbumItem{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: .8em;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #646464;
+}
+.Sound__AlbumItem:nth-child(0){ margin-bottom: -100px; }
+.Sound__AlbumItem--play{ margin-left: .5em; cursor: pointer }
+.Sound__AlbumItem--active{ margin-left: .5em }
+#CloseAlbum{ float: right; width: fit-content; margin-top: 2px; margin-right: -5px; cursor: pointer }
+#CloseAlbum:hover{ opacity: .5 }
+#Album{
+    margin-top: 2.5em;
+}
 /* ----------------------- GAME */
 
 #GoBackMenu{

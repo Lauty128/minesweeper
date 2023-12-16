@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Music 0",
+        "index": 0,
+        "duration": "2:07"
+    },
+    {
+        "name": "Music 1",
+        "index": 1,
+        "duration": "2:12"
+    },
+    {
+        "name": "Music 2",
+        "index": 2,
+        "duration": "1:33"
+    },
+    {
+        "name": "Music 3",
+        "index": 3,
+        "duration": "4:33"
+    },
+    {
+        "name": "Music 4",
+        "index": 4,
+        "duration": "2:00"
+    },
+    {
+        "name": "Music 5",
+        "index": 5,
+        "duration": "2:27"
+    },
+    {
+        "name": "Music 6",
+        "index": 6,
+        "duration": "1:07"
+    }
+]
