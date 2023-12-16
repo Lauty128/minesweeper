@@ -89,6 +89,9 @@ class Menu{
         if(!this.AlbumBox.classList.contains('Sound__Album--active')){
             this.AlbumBox.classList.add('Sound__Album--active') 
         }
+        else{
+            this.AlbumBox.classList.remove('Sound__Album--active') 
+        }
      }
 
     static CloseAlbum(){
@@ -97,7 +100,9 @@ class Menu{
 
     static play(){
         this.Speaker.play();
-        this.soundStatus = true;
+        if(!this.soundStatus){
+            this.changeSatusSound()
+        }
     }
 
 }
