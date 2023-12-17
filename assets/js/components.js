@@ -1,28 +1,31 @@
 class Components{
 
+    //---------------------------> GENERAL
     static Title(){
         return "<h1>💣 BUSCAMINAS</h1>";
     }
-
+    
+    //---------------------------> GAME
     static Bomb(index){
         return `<div class="Game__item Game__item--hidden" data-index="${index}">
-                <img src="assets/img/bomb.png" />
-            </div>`
-    }
-
-    static Item(index){
-        return `<div class="Game__item Game__item--hidden" data-index="${index}">
-            <img src="assets/img/money.png" />
+        <img src="assets/img/bomb.png" />
         </div>`
     }
-
+    
+    static Item(index){
+        return `<div class="Game__item Game__item--hidden" data-index="${index}">
+        <img src="assets/img/money.png" />
+        </div>`
+    }
+    
+    //---------------------------> GAMES HISTORY
     static History_point_header(){
         return `<div class="History__point History__point--header">
             <span>Fecha</span>
             <span>Puntos</span>
         </div>`
     }
-
+    
     static History_point(point){
         return `<div class="History__point">
             <span>${point.date}</span>
@@ -30,12 +33,13 @@ class Components{
         </div>`
     }
 
-    static Empty_history_point(point){
+    static Empty_history_point(){
         return `<div class="History__point History__point--empty">
             <span>No hay historial de juegos</span>
         </div>`
     }
 
+    //---------------------------> MENU
     static Menu(){
         return `${ this.Title() }
         <span class="Subtitle">Selecciona el formato de juego y dale a <b>Jugar</b></span>
@@ -66,14 +70,15 @@ class Components{
         </form>`
     }
 
-    static MusicItem(item){
+    //---------------------------> SONGS LIST
+    static SongItem(item){
         return `<div class="Sound__AlbumItem">
-            <span>${item.name} <b class="Sound__AlbumItem--play" data-music="${item.index}">▶</b></span>
+            <span>${item.name} <b class="Sound__AlbumItem--play" data-Song="${item.index}">▶</b></span>
             <span>${item.duration}</span>
         </div>`
     }
 
-    static ActiveMusicItem(item){
+    static ActiveSongItem(item){
         return `<div class="Sound__AlbumItem">
             <span>${item.name} <b class="Sound__AlbumItem--active" data-music="${item.index}">🔊</b></span>
             <span>${item.duration}</span>

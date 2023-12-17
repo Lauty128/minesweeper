@@ -1,8 +1,10 @@
+//------------------------------> Components
 import Components from './components.js';
 
 class Game{
     
-    //--> public
+//------------------------------> Properties 
+    // Public
     bomb_quantity;  //integer
     columns;        //integer
     rows;           //integer
@@ -10,15 +12,17 @@ class Game{
     status = true;  //boolean
     history_points; //array
     
-    //--> private
+    // Private
     #bombs_index;   //array
-
+    
+//------------------------------> Contructor
     constructor(columns, rows, bombs_quantity){
+        // Define main options
         this.columns = columns;
         this.rows = rows;
         this.bomb_quantity = bombs_quantity;
         
-        //------> Load history of LocalStorage
+        //------> Load history of LocalStorage, if this exists
         const pointsText = localStorage.getItem(`${this.columns}-${this.rows}-${this.bomb_quantity}`);
         this.history_points = JSON.parse(pointsText) ? JSON.parse(pointsText) : [];
         
@@ -26,48 +30,9 @@ class Game{
         this.defineBombs();
         this.loadGame();
     }
-
-    validate_move(index){
-        if(this.#bombs_index.includes(index)){
-            this.lostGame();
-            return
-        }
-        this.moves++
-    }
-
-    defineGrid(){
-        let Items = '';
-        for(let index = 0; index < (this.columns * this.rows); index++) {
-            if(this.#bombs_index.includes(index)){
-                Items += Components.Bomb(index)
-            }
-            else{
-                Items += Components.Item(index)
-            }  
-        }
-
-        return Items;
-    }
-
-    defineBombs(){
-        this.#bombs_index = [];
-
-        // Quantity of items in grid
-        const gridQuantity = this.columns * this.rows;
-        
-        // Execute For sentence for the quantity bombs
-        for(let index = 1; index <= this.bomb_quantity; index++){
-            let finded = false;
-
-            while(!finded){
-                let number = Math.floor(Math.random() * gridQuantity);
-                if(!this.#bombs_index.includes(number)){
-                    this.#bombs_index.push(number);
-                    finded = true;
-                }
-            }
-        }
-    }
+    
+//------------------------------> Functions
+    //----------- RENDER
 
     loadGame(){
         document.querySelector('main').innerHTML = `${Components.Title()}
@@ -84,15 +49,19 @@ class Game{
         `;
         document.getElementById('Game').style.gridTemplateColumns = `repeat(${this.columns}, 50px)`;
     }
-
-    lostGame(){
-        alert('Perdiste!!');
-        alert('Total de jugadas correctas = ' + this.moves)
+    
+    defineGrid(){
+        let Items = '';
+        for(let index = 0; index < (this.columns * this.rows); index++) {
+            if(this.#bombs_index.includes(index)){
+                Items += Components.Bomb(index)
+            }
+            else{
+                Items += Components.Item(index)
+            }  
+        }
         
-        document.querySelectorAll('.Game__item--hidden').forEach(target=>{
-            target.classList.remove('Game__item--hidden')
-        })
-        this.store_points();
+        return Items;
     }
 
     load_points_history(){
@@ -114,9 +83,54 @@ class Game{
 
         return Items;
     }
+    
+    //----------- ACTIONS
+    
+    // Validate move to verify if it is a bomb index
+    validate_move(index){
+        if(this.#bombs_index.includes(index)){
+            this.lostGame();
+            return
+        }
+        this.moves++
+    }
 
+    // Define the bombs positions in the grid. (random way)
+    defineBombs(){
+        this.#bombs_index = [];
+        
+        // Quantity of items in grid
+        const gridQuantity = this.columns * this.rows;
+        
+        // Execute For sentence for the quantity bombs
+        for(let index = 1; index <= this.bomb_quantity; index++){
+            let finded = false;
+
+            while(!finded){
+                let number = Math.floor(Math.random() * gridQuantity);
+                if(!this.#bombs_index.includes(number)){
+                    this.#bombs_index.push(number);
+                    finded = true;
+                }
+            }
+        }
+    }
+
+    // Define the lost game and store the points 
+    lostGame(){
+        alert('Perdiste!!');
+        alert('Total de jugadas correctas = ' + this.moves)
+        
+        document.querySelectorAll('.Game__item--hidden').forEach(target=>{
+            target.classList.remove('Game__item--hidden')
+        })
+
+        // Store the points
+        this.store_points();
+    }
+
+    // Store the points obtained in the game
     store_points(){
-        console.log(this.history_points);
         if(this.history_points.length == 5){
             this.history_points.shift();
         }
@@ -125,6 +139,7 @@ class Game{
         localStorage.setItem(`${this.columns}-${this.rows}-${this.bomb_quantity}`, JSON.stringify(this.history_points))
     }
 
+    // Change bombs positions and restart points
     restart(){
         this.defineBombs();
         this.loadGame();
