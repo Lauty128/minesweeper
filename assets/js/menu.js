@@ -86,7 +86,6 @@ class Menu{
         this.MusicNumber = number ? number : this.selectRandomSong();
         this.Speaker.src = './assets/music/music'+this.MusicNumber+'.mp3';
         this.loadAlbum();
-        this.play();
     }
 
     // Change icon that represents the sound state

@@ -71,9 +71,10 @@ Menu.AlbumBox.addEventListener('click', (e)=>{
     }
 
     if(e.target.classList.contains('Sound__AlbumItem--play')){
-        const number = e.target.dataset.music || 0;
+        const number = e.target.dataset.song || 0;
         //-- The indicated song will be played
-        Menu.changeSong(number)
+        Menu.changeSong(number);
+        Menu.play();
     }
 })
 
@@ -81,6 +82,7 @@ Menu.AlbumBox.addEventListener('click', (e)=>{
 Menu.Speaker.addEventListener('ended', ()=>{
     // it changes to a random song
     Menu.changeSong();
+    Menu.play();
 })
 
 
