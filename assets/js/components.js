@@ -26,6 +26,13 @@ class Components{
         </div>`
     }
     
+    static History_win_game(point){
+        return `<div class="History__point History__point--winner">
+            <span>${point.date}</span>
+            <span>${point.point}</span>
+        </div>`
+    }
+
     static History_point(point){
         return `<div class="History__point">
             <span>${point.date}</span>

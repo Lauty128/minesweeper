@@ -75,10 +75,18 @@ class Game{
         }
 
         for(let index = (history.length - 1); index > -1; index--) {
-            Items += Components.History_point({
-                point: history[index].point,
-                date: new Date(history[index].date).toLocaleDateString()
-            })
+            if(history[index].point == ((this.rows * this.columns) - this.#bombs_index.length)){
+                Items += Components.History_win_game({
+                    point: history[index].point,
+                    date: new Date(history[index].date).toLocaleDateString()
+                })
+            }
+            else{
+                Items += Components.History_point({
+                    point: history[index].point,
+                    date: new Date(history[index].date).toLocaleDateString()
+                })
+            }
         }
 
         return Items;
@@ -93,6 +101,9 @@ class Game{
             return
         }
         this.moves++
+        if(this.moves == ((this.rows * this.columns) - this.#bombs_index.length)){
+            this.winGame()
+        }
     }
 
     // Define the bombs positions in the grid. (random way)
@@ -121,6 +132,17 @@ class Game{
         alert('Perdiste!!');
         alert('Total de jugadas correctas = ' + this.moves)
         
+        document.querySelectorAll('.Game__item--hidden').forEach(target=>{
+            target.classList.remove('Game__item--hidden')
+        })
+
+        // Store the points
+        this.store_points();
+    }
+
+    winGame(){
+        alert('Ganaste!!');
+
         document.querySelectorAll('.Game__item--hidden').forEach(target=>{
             target.classList.remove('Game__item--hidden')
         })

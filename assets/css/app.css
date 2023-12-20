@@ -235,6 +235,7 @@ main{
 .History__point span{ font-weight: bold; font-family: 'Courier New', Courier, monospace; }
 .History__point--header{ background-color: #8d8d8d; color: #fff }
 .History__point--empty{ justify-content: center }
+.History__point--winner{ background-color: #1f6605 }
 
 @media screen and (max-width: 500px) {
     .History{ width: 80% }
