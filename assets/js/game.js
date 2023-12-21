@@ -15,8 +15,11 @@ class Game{
     // Private
     #bombs_index;   //@array
     
-//------------------------------> Contructor
-    constructor(columns /*@integer*/, rows /*@integer*/, bombs_quantity /*@integer*/){
+//-----------------------------------------------------------
+//------------------------------> CONSTRUCTOR ---------------
+//-----------------------------------------------------------
+    constructor(columns /*@integer*/, rows /*@integer*/, bombs_quantity /*@integer*/)
+    {
         // Define main options
         this.columns = columns;
         this.rows = rows;
@@ -31,41 +34,148 @@ class Game{
         this.loadGame();
     }
     
-//------------------------------> Functions
-    //----------- RENDER
-    loadGame(){
+//-----------------------------------------------------------
+//------------------------------> COMPONENTS ----------------
+//-----------------------------------------------------------
+    //---------> GAME
+    #Bomb(index /*@integer*/) //@HTMLElement
+    {
+        //---> Container
+        const div = document.createElement("div");
+        div.classList.add('Game__item');
+        div.classList.add('Game__item--hidden');
+        div.setAttribute('data-index', index);
+        //---> Image
+        const image = document.createElement("img");
+        image.src = "assets/img/bomb.png";
+
+        div.appendChild(image)
+        return div;
+    }
+
+    #Item(index /*@integer*/) //@HTMLElement
+    {
+        //---> Container
+        const div = document.createElement("div");
+        div.classList.add('Game__item');
+        div.classList.add('Game__item--hidden');
+        div.setAttribute('data-index', index);
+        //---> Image
+        const image = document.createElement("img");
+        image.src = "assets/img/money.png";
+
+        div.appendChild(image)
+        return div;
+    }
+
+    //---------> GAMES HISTORY
+    #History_section() //@HTMLElement
+    {
+        //---> Container
+        const section = document.createElement('section');
+        const h3 = document.createElement('h3');
+
+        //---> Config
+        section.classList.add('History');
+        h3.classList.add('History__h3');
+
+        //---> Text
+        h3.textContent = 'Historial de juegos';
+
+        section.appendChild(h3);
+        return section;
+    }
+
+    #History_point_header() //@HTMLElement
+    {
+        //---> Container
+        const div = document.createElement("div");
+        div.classList.add('History__point');
+        div.classList.add('History__point--header');
+        //---> Text
+        const span1 = document.createElement("span");
+        const span2 = document.createElement("span");
+        span1.textContent = 'Fecha';
+        span2.textContent = 'Puntos';
+
+        div.appendChild(span1);
+        div.appendChild(span2);
+        return div;
+    }
+    
+    #History_point(point /*@integer*/, winner = false /*@boolean*/) //@HTMLElement
+    {
+        //---> Container
+        const div = document.createElement("div");
+        div.classList.add('History__point');
+        if(winner){
+            div.classList.add('History__point--winner');
+        }
+        //---> Text
+        const span1 = document.createElement("span");
+        const span2 = document.createElement("span");
+        span1.textContent = point.date;
+        span2.textContent = point.point;
+
+        div.appendChild(span1);
+        div.appendChild(span2);
+        return div;
+    }
+
+    #Empty_history_point() //@HTMLElement
+    {
+        //---> Container
+        const div = document.createElement("div");
+        div.classList.add('History__point');
+        div.classList.add('History__point--empty');
+        //---> Text
+        const span = document.createElement("span");
+        span.textContent = 'No hay historial de juegos';
+
+        div.appendChild(span);
+        return div;
+    }
+
+//-----------------------------------------------------------
+//------------------------------> FUNCTIONS -----------------
+//-----------------------------------------------------------
+
+//-----------> RENDER
+    loadGame() //@Void
+    {
         const main = document.querySelector('main');
         main.innerHTML = '';
 
-        //---> Elements
+        // Elements
         const goBackButton = document.createElement('button');
         const restartButton = document.createElement('button');
         const Game = document.createElement('section');
 
-        //---> Configs
+        // Configs
         goBackButton.setAttribute('id','GoBackMenu');
         restartButton.setAttribute('id','RestartGame');
         Game.setAttribute('id','Game')
         Game.classList.add('Game')
 
-        //---> Text
+        // Text
         goBackButton.textContent = '← Menu Principal';
         restartButton.textContent = '↻ Reiniciar juego';
 
-        //---> Global Load
+        // Global Load
         main.appendChild(Components.Title());
         main.appendChild(goBackButton);
         main.appendChild(Game);
         main.appendChild(restartButton);
-        main.appendChild(Components.History_section());
+        main.appendChild(this.#History_section());
 
-        //---> Load History and Game
+        // Load History and Game
         document.querySelector('.History').appendChild(this.load_points_history())
         document.getElementById('Game').appendChild(this.defineGrid())
         document.getElementById('Game').style.gridTemplateColumns = `repeat(${this.columns}, 50px)`;
     }
     
-    defineGrid(){
+    defineGrid() //@HTMLElement
+    {
         //---> Create Fragment
         const Items = document.createDocumentFragment()
 
@@ -73,37 +183,38 @@ class Game{
         for(let index = 0; index < (this.columns * this.rows); index++) {
             if(this.#bombs_index.includes(index)){
                 // load bomb
-                Items.appendChild(Components.Bomb(index))
+                Items.appendChild(this.#Bomb(index))
             }
             // Load item
-            else{ Items.appendChild(Components.Item(index)) }  
+            else{ Items.appendChild(this.#Item(index)) }  
         }
 
         return Items;
     }
 
-    load_points_history(){
-        //---> Create Fragment
+    load_points_history() //@HTMLElement
+    {
+        // Create Fragment
         const Items = document.createDocumentFragment();
 
-        //---> Read history points of the LocalStorage, if it exists
+        // Read history points of the LocalStorage, if it exists
         const history = this.history_points;
 
-        //---> Header
-        Items.appendChild(Components.History_point_header());
+        // Header
+        Items.appendChild(this.#History_point_header());
 
-        //---> If the history doesn't exist, then a text is loaded
+        // If the history doesn't exist, then a text is loaded
         if(history.length == 0){
-            Items.appendChild(Components.Empty_history_point());
+            Items.appendChild(this.#Empty_history_point());
             return Items;
         }
 
         for(let index = (history.length - 1); index > -1; index--){
-            //---> Load winner game
+            // Load winner game
             const winner = history[index].point == ((this.rows * this.columns) - this.#bombs_index.length);
             
-            //---> Load history item
-            Items.appendChild(Components.History_point({
+            // Load history item
+            Items.appendChild(this.#History_point({
                 point: history[index].point,
                 date: new Date(history[index].date).toLocaleDateString()
             }, winner));
@@ -112,10 +223,10 @@ class Game{
         return Items;
     }
     
-    //----------- ACTIONS
-    
+//-----------> ACTIONS
     // Validate move to verify if it is a bomb index
-    validate_move(index){
+    validate_move(index /*@integer*/) //@Void
+    {
         // if index exists in #bombs_index array, the game is lost
         if(this.#bombs_index.includes(index)){
             this.lostGame();
@@ -130,7 +241,8 @@ class Game{
     }
 
     // Define the bombs positions in the grid. (random way)
-    defineBombs(){
+    defineBombs() //@Void
+    {
         this.#bombs_index = [];
         
         // Quantity of items in grid
@@ -151,7 +263,8 @@ class Game{
     }
 
     // Define the lost game and store the points 
-    lostGame(){
+    lostGame() //@Void
+    {
         alert('Perdiste!!');
         alert('Total de jugadas correctas = ' + this.moves)
         
@@ -163,7 +276,8 @@ class Game{
         this.store_points();
     }
 
-    winGame(){
+    winGame() //@Void
+    {
         alert('Ganaste!!');
 
         document.querySelectorAll('.Game__item--hidden').forEach(target=>{
@@ -175,7 +289,8 @@ class Game{
     }
 
     // Store the points obtained in the game
-    store_points(){
+    store_points() //@Void
+    {
         if(this.history_points.length == 5){
             this.history_points.shift();
         }
@@ -185,7 +300,8 @@ class Game{
     }
 
     // Change bombs positions and restart points
-    restart(){
+    restart() //@Void
+    {
         if(this.moves > 0){
             this.defineBombs();
             this.loadGame();
