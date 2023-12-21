@@ -2,53 +2,107 @@ class Components{
 
     //---------------------------> GENERAL
     static Title(){
-        return "<h1>💣 BUSCAMINAS</h1>";
+        const H1 = document.createElement("h1");
+        H1.textContent = '💣 BUSCAMINAS';
+        return H1;
     }
     
     //---------------------------> GAME
     static Bomb(index){
-        return `<div class="Game__item Game__item--hidden" data-index="${index}">
-        <img src="assets/img/bomb.png" />
-        </div>`
+        //---> Container
+        const div = document.createElement("div");
+        div.classList.add('Game__item');
+        div.classList.add('Game__item--hidden');
+        div.setAttribute('data-index', index);
+        //---> Image
+        const image = document.createElement("img");
+        image.src = "assets/img/bomb.png";
+
+        div.appendChild(image)
+        return div;
     }
     
     static Item(index){
-        return `<div class="Game__item Game__item--hidden" data-index="${index}">
-        <img src="assets/img/money.png" />
-        </div>`
+        //---> Container
+        const div = document.createElement("div");
+        div.classList.add('Game__item');
+        div.classList.add('Game__item--hidden');
+        div.setAttribute('data-index', index);
+        //---> Image
+        const image = document.createElement("img");
+        image.src = "assets/img/money.png";
+
+        div.appendChild(image)
+        return div;
     }
     
     //---------------------------> GAMES HISTORY
-    static History_point_header(){
-        return `<div class="History__point History__point--header">
-            <span>Fecha</span>
-            <span>Puntos</span>
-        </div>`
-    }
-    
-    static History_win_game(point){
-        return `<div class="History__point History__point--winner">
-            <span>${point.date}</span>
-            <span>${point.point}</span>
-        </div>`
+    static History_section(){
+        //---> Container
+        const section = document.createElement('section');
+        const h3 = document.createElement('h3');
+
+        //---> Config
+        section.classList.add('History');
+        h3.classList.add('History__h3');
+
+        //---> Text
+        h3.textContent = 'Historial de juegos';
+
+        section.appendChild(h3);
+        return section;
     }
 
-    static History_point(point){
-        return `<div class="History__point">
-            <span>${point.date}</span>
-            <span>${point.point}</span>
-        </div>`
+    static History_point_header(){
+        //---> Container
+        const div = document.createElement("div");
+        div.classList.add('History__point');
+        div.classList.add('History__point--header');
+        //---> Text
+        const span1 = document.createElement("span");
+        const span2 = document.createElement("span");
+        span1.textContent = 'Fecha';
+        span2.textContent = 'Puntos';
+
+        div.appendChild(span1);
+        div.appendChild(span2);
+        return div;
+    }
+    
+    static History_point(point, winner = false){
+        //---> Container
+        const div = document.createElement("div");
+        div.classList.add('History__point');
+        if(winner){
+            div.classList.add('History__point--winner');
+        }
+        //---> Text
+        const span1 = document.createElement("span");
+        const span2 = document.createElement("span");
+        span1.textContent = point.date;
+        span2.textContent = point.point;
+
+        div.appendChild(span1);
+        div.appendChild(span2);
+        return div;
     }
 
     static Empty_history_point(){
-        return `<div class="History__point History__point--empty">
-            <span>No hay historial de juegos</span>
-        </div>`
+        //---> Container
+        const div = document.createElement("div");
+        div.classList.add('History__point');
+        div.classList.add('History__point--empty');
+        //---> Text
+        const span = document.createElement("span");
+        span.textContent = 'No hay historial de juegos';
+
+        div.appendChild(span);
+        return div;
     }
 
     //---------------------------> MENU
     static Menu(){
-        return `${ this.Title() }
+        return `<h1>💣 BUSCAMINAS</h1>
         <span class="Subtitle">Selecciona el formato de juego y dale a <b>Jugar</b></span>
     
         <form class="Menu__form" id="MenuForm">

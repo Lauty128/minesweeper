@@ -5,18 +5,18 @@ class Game{
     
 //------------------------------> Properties 
     // Public
-    bomb_quantity;  //integer
-    columns;        //integer
-    rows;           //integer
-    moves = 0;      //boolean
-    status = true;  //boolean
-    history_points; //array
+    bomb_quantity;  //@integer
+    columns;        //@integer
+    rows;           //@integer
+    moves = 0;      //@boolean
+    status = true;  //@boolean
+    history_points; //@array
     
     // Private
-    #bombs_index;   //array
+    #bombs_index;   //@array
     
 //------------------------------> Contructor
-    constructor(columns, rows, bombs_quantity){
+    constructor(columns /*@integer*/, rows /*@integer*/, bombs_quantity /*@integer*/){
         // Define main options
         this.columns = columns;
         this.rows = rows;
@@ -33,60 +33,80 @@ class Game{
     
 //------------------------------> Functions
     //----------- RENDER
-
     loadGame(){
-        document.querySelector('main').innerHTML = `${Components.Title()}
-        <button id="GoBackMenu">← Menu Principal</button>
-        <section class="Game" id="Game">
-            ${ this.defineGrid() }
-        </section>
-        <button id="RestartGame">↻ Reiniciar juego</button>
+        const main = document.querySelector('main');
+        main.innerHTML = '';
 
-        <section class="History">
-            <h3 class="History__h3">Historial de juegos</h3>
-            ${this.load_points_history()}
-        </section>
-        `;
+        //---> Elements
+        const goBackButton = document.createElement('button');
+        const restartButton = document.createElement('button');
+        const Game = document.createElement('section');
+
+        //---> Configs
+        goBackButton.setAttribute('id','GoBackMenu');
+        restartButton.setAttribute('id','RestartGame');
+        Game.setAttribute('id','Game')
+        Game.classList.add('Game')
+
+        //---> Text
+        goBackButton.textContent = '← Menu Principal';
+        restartButton.textContent = '↻ Reiniciar juego';
+
+        //---> Global Load
+        main.appendChild(Components.Title());
+        main.appendChild(goBackButton);
+        main.appendChild(Game);
+        main.appendChild(restartButton);
+        main.appendChild(Components.History_section());
+
+        //---> Load History and Game
+        document.querySelector('.History').appendChild(this.load_points_history())
+        document.getElementById('Game').appendChild(this.defineGrid())
         document.getElementById('Game').style.gridTemplateColumns = `repeat(${this.columns}, 50px)`;
     }
     
     defineGrid(){
-        let Items = '';
+        //---> Create Fragment
+        const Items = document.createDocumentFragment()
+
+        //---> Load grid items 
         for(let index = 0; index < (this.columns * this.rows); index++) {
             if(this.#bombs_index.includes(index)){
-                Items += Components.Bomb(index)
+                // load bomb
+                Items.appendChild(Components.Bomb(index))
             }
-            else{
-                Items += Components.Item(index)
-            }  
+            // Load item
+            else{ Items.appendChild(Components.Item(index)) }  
         }
-        
+
         return Items;
     }
 
     load_points_history(){
-        let Items = '';
-        const history = this.history_points;
-        Items = Components.History_point_header()
+        //---> Create Fragment
+        const Items = document.createDocumentFragment();
 
+        //---> Read history points of the LocalStorage, if it exists
+        const history = this.history_points;
+
+        //---> Header
+        Items.appendChild(Components.History_point_header());
+
+        //---> If the history doesn't exist, then a text is loaded
         if(history.length == 0){
-            Items += Components.Empty_history_point();
+            Items.appendChild(Components.Empty_history_point());
             return Items;
         }
 
-        for(let index = (history.length - 1); index > -1; index--) {
-            if(history[index].point == ((this.rows * this.columns) - this.#bombs_index.length)){
-                Items += Components.History_win_game({
-                    point: history[index].point,
-                    date: new Date(history[index].date).toLocaleDateString()
-                })
-            }
-            else{
-                Items += Components.History_point({
-                    point: history[index].point,
-                    date: new Date(history[index].date).toLocaleDateString()
-                })
-            }
+        for(let index = (history.length - 1); index > -1; index--){
+            //---> Load winner game
+            const winner = history[index].point == ((this.rows * this.columns) - this.#bombs_index.length);
+            
+            //---> Load history item
+            Items.appendChild(Components.History_point({
+                point: history[index].point,
+                date: new Date(history[index].date).toLocaleDateString()
+            }, winner));
         }
 
         return Items;
@@ -96,11 +116,14 @@ class Game{
     
     // Validate move to verify if it is a bomb index
     validate_move(index){
+        // if index exists in #bombs_index array, the game is lost
         if(this.#bombs_index.includes(index)){
             this.lostGame();
             return
         }
+        // new move
         this.moves++
+        // If all moves are valid, then the game is won
         if(this.moves == ((this.rows * this.columns) - this.#bombs_index.length)){
             this.winGame()
         }
@@ -163,9 +186,12 @@ class Game{
 
     // Change bombs positions and restart points
     restart(){
-        this.defineBombs();
-        this.loadGame();
-        this.moves = 0;
+        if(this.moves > 0){
+            this.defineBombs();
+            this.loadGame();
+            this.moves = 0;
+            console.log('Reiniciando...');
+        }
     }
 
 }
